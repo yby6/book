@@ -1,0 +1,39 @@
+package com.example.demo;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.*;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+
+import javax.servlet.http.HttpServletRequest;
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+public class login {
+
+    private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.yby);
+    @PostMapping("/login")
+    public Map<String, Object> login(@RequestBody Map<String, String> user) {
+        String username = user.get("username");
+        String password = user.get("password");
+        if (users.containsKey(username) && users.get(username).equals(password)) {
+            String token = Jwts.builder()
+
+            Map<String, Object> result = new HashMap<>();
+            result.put("token", token);
+            return result;}
+        else {
+            throw new RuntimeException("Invalid username or password");
+        }
+    }
+    @PostMapping("/add_article")
+    public Map<String, Object> add_article(@RequestBody Map<String, String> article, HttpServletRequest request){}
+    @DeleteMapping("/delete_article")
+    public Map<String, Object> delete_article(@RequestBody Map<String, String> article, HttpServletRequest request){}
+    @PutMapping("/put_artical")
+    public Map<String,Object>put_article(@RequestBody Map<String,String>article,HttpServletRequest reqest){}
+    @GetMapping("/get_artical")
+    public Map<String, Object> get_artical(@RequestBody Map<String,String>artical,HttpServletRequest requst)
